@@ -1,0 +1,50 @@
+/* Additional app-specific styles */
+
+/* Prevent universal transitions that break transforms */
+button, input, select, textarea {
+  transition: background-color var(--transition-smooth),
+              border-color var(--transition-smooth),
+              color var(--transition-smooth),
+              opacity var(--transition-smooth);
+}
+
+/* Eye container specific styles */
+.eye-container {
+  perspective: 1000px;
+}
+
+/* Code syntax highlighting */
+.code-block {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Interactive elements hover states */
+.interactive-hover {
+  transition: transform var(--transition-smooth);
+}
+
+.interactive-hover:hover {
+  transform: translateY(-2px);
+}
+
+/* Gradient borders */
+.gradient-border {
+  position: relative;
+  background: hsl(var(--card));
+  border: 1px solid transparent;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--gradient-glow);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}

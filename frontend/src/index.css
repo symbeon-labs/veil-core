@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    margin: 0;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: 'IBM Plex Mono', source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+@layer base {
+    :root {
+        /* Cyberpunk Dark Theme - Robotics */
+        --background: 220 18% 7%;        /* Deep dark blue-gray #0f1419 */
+        --foreground: 210 20% 95%;       /* Soft white #eff1f5 */
+        
+        --card: 220 15% 10%;             /* Dark card bg #16181f */
+        --card-foreground: 210 20% 95%;  
+        
+        --popover: 220 18% 9%;           
+        --popover-foreground: 210 20% 95%;
+        
+        /* Primary: Cyan neon - robotic eye glow */
+        --primary: 187 100% 50%;         /* Electric cyan #00e5ff */
+        --primary-foreground: 220 18% 7%;
+        --primary-glow: 187 100% 65%;    /* Lighter cyan glow */
+        
+        /* Secondary: Teal green - terminal/scan color */
+        --secondary: 167 85% 45%;        /* Teal #0ec896 */
+        --secondary-foreground: 220 18% 7%;
+        
+        /* Accent: Magenta pink - alert/highlight */
+        --accent: 345 100% 60%;          /* Neon magenta #ff2e63 */
+        --accent-foreground: 220 18% 7%;
+        
+        --muted: 220 15% 15%;            /* Muted elements */
+        --muted-foreground: 210 10% 60%; /* Muted text */
+        
+        --destructive: 0 84% 60%;        
+        --destructive-foreground: 210 20% 95%;
+        
+        --border: 220 15% 18%;           /* Subtle borders */
+        --input: 220 15% 18%;
+        --ring: 187 100% 50%;            /* Cyan focus ring */
+        
+        --chart-1: 187 100% 50%;         /* Cyan */
+        --chart-2: 167 85% 45%;          /* Teal */
+        --chart-3: 345 100% 60%;         /* Magenta */
+        --chart-4: 280 65% 60%;          /* Purple */
+        --chart-5: 45 90% 55%;           /* Yellow */
+        
+        --radius: 0.5rem;
+        
+        /* Custom Cyberpunk Design Tokens */
+        --gradient-cyber: linear-gradient(135deg, hsl(187 100% 50% / 0.2) 0%, hsl(167 85% 45% / 0.1) 100%);
+        --gradient-glow: linear-gradient(90deg, hsl(187 100% 50%) 0%, hsl(167 85% 45%) 100%);
+        --gradient-accent: linear-gradient(135deg, hsl(345 100% 60%) 0%, hsl(280 65% 60%) 100%);
+        --gradient-overlay: linear-gradient(180deg, hsl(220 18% 7% / 0) 0%, hsl(220 18% 7%) 100%);
+        
+        /* Shadows with neon glow */
+        --shadow-glow: 0 0 20px hsl(187 100% 50% / 0.3), 0 0 40px hsl(187 100% 50% / 0.1);
+        --shadow-glow-strong: 0 0 30px hsl(187 100% 50% / 0.5), 0 0 60px hsl(187 100% 50% / 0.2);
+        --shadow-card: 0 4px 6px -1px hsl(220 18% 4% / 0.3), 0 2px 4px -1px hsl(220 18% 4% / 0.2);
+        --shadow-accent: 0 0 20px hsl(345 100% 60% / 0.3);
+        
+        /* Animations */
+        --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+    
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        @apply bg-background;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        @apply bg-primary/30 rounded-lg;
+        transition: background-color 0.2s;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        @apply bg-primary/50;
+    }
+}
+
+@layer components {
+    /* Glow effect utilities */
+    .glow-cyan {
+        box-shadow: var(--shadow-glow);
+    }
+    
+    .glow-cyan-strong {
+        box-shadow: var(--shadow-glow-strong);
+    }
+    
+    .glow-accent {
+        box-shadow: var(--shadow-accent);
+    }
+    
+    /* Text gradients */
+    .text-gradient-cyber {
+        background: linear-gradient(90deg, hsl(187 100% 50%), hsl(167 85% 45%));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .text-gradient-accent {
+        background: linear-gradient(90deg, hsl(345 100% 60%), hsl(280 65% 60%));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    /* Scan line animation */
+    @keyframes scan {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(100%); }
+    }
+    
+    .scan-line {
+        animation: scan 3s linear infinite;
+    }
+    
+    /* Pulse glow animation */
+    @keyframes pulse-glow {
+        0%, 100% { opacity: 1; box-shadow: var(--shadow-glow); }
+        50% { opacity: 0.8; box-shadow: var(--shadow-glow-strong); }
+    }
+    
+    .pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+    }
+    
+    /* Float animation */
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    .float {
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    /* Grid background */
+    .grid-background {
+        background-image: 
+            linear-gradient(hsl(187 100% 50% / 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(187 100% 50% / 0.05) 1px, transparent 1px);
+        background-size: 50px 50px;
+    }
+}
+
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
+    }
+
+    [data-debug-wrapper="true"] > * {
+        margin-left: inherit;
+        margin-right: inherit;
+        margin-top: inherit;
+        margin-bottom: inherit;
+        padding-left: inherit;
+        padding-right: inherit;
+        padding-top: inherit;
+        padding-bottom: inherit;
+        column-gap: inherit;
+        row-gap: inherit;
+        gap: inherit;
+        border-left-width: inherit;
+        border-right-width: inherit;
+        border-top-width: inherit;
+        border-bottom-width: inherit;
+        border-left-style: inherit;
+        border-right-style: inherit;
+        border-top-style: inherit;
+        border-bottom-style: inherit;
+        border-left-color: inherit;
+        border-right-color: inherit;
+        border-top-color: inherit;
+        border-bottom-color: inherit;
+    }
+}
