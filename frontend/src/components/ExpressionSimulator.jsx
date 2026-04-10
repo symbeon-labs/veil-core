@@ -200,6 +200,7 @@ controller.setExpression(expression);`;
                     variant={isPlaying ? "default" : "outline"}
                     className="flex-1"
                     onClick={() => setIsPlaying(!isPlaying)}
+                    data-testid="play-pause-button"
                   >
                     {isPlaying ? (
                       <>
@@ -222,6 +223,7 @@ controller.setExpression(expression);`;
                       setEffect('static');
                       setIsPlaying(false);
                     }}
+                    data-testid="reset-button"
                   >
                     <RefreshCw className="h-4 w-4" />
                   </Button>
@@ -243,6 +245,7 @@ controller.setExpression(expression);`;
                       variant="outline"
                       className="justify-start"
                       onClick={() => applyPreset(preset)}
+                      data-testid={`preset-${preset.name.toLowerCase()}`}
                     >
                       {preset.name}
                     </Button>
@@ -265,12 +268,12 @@ controller.setExpression(expression);`;
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Forma</label>
                   <Select value={shape} onValueChange={setShape}>
-                    <SelectTrigger>
+                    <SelectTrigger data-testid="shape-trigger">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="z-[100]">
                       {shapes.map((s) => (
-                        <SelectItem key={s.value} value={s.value}>
+                        <SelectItem key={s.value} value={s.value} data-testid={`shape-${s.value}`}>
                           {s.label}
                         </SelectItem>
                       ))}
@@ -282,18 +285,18 @@ controller.setExpression(expression);`;
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Cor</label>
                   <Select value={color} onValueChange={setColor}>
-                    <SelectTrigger>
+                    <SelectTrigger data-testid="color-trigger">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="z-[100]">
                       {colors.map((c) => (
-                        <SelectItem key={c.value} value={c.value}>
-                          <div className="flex items-center gap-2">
+                        <SelectItem key={c.value} value={c.value} data-testid={`color-${c.value}`}>
+                          <div className="flex items-center gap-2 pointer-events-none">
                             <div
                               className="w-4 h-4 rounded-full"
                               style={{ backgroundColor: c.color }}
                             />
-                            {c.label} - {c.description}
+                            <span>{c.label} - {c.description}</span>
                           </div>
                         </SelectItem>
                       ))}
@@ -320,12 +323,12 @@ controller.setExpression(expression);`;
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Efeito</label>
                   <Select value={effect} onValueChange={setEffect}>
-                    <SelectTrigger>
+                    <SelectTrigger data-testid="effect-trigger">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="z-[100]">
                       {effects.map((e) => (
-                        <SelectItem key={e.value} value={e.value}>
+                        <SelectItem key={e.value} value={e.value} data-testid={`effect-${e.value}`}>
                           {e.label} - {e.description}
                         </SelectItem>
                       ))}

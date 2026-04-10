@@ -41,7 +41,7 @@ export const Roadmap = () => {
   };
 
   return (
-    <section className="py-20 sm:py-32 relative">
+    <section id="roadmap" className="py-20 sm:py-32 relative">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">

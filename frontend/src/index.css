@@ -107,6 +107,11 @@ code {
     ::-webkit-scrollbar-thumb:hover {
         @apply bg-primary/50;
     }
+    
+    /* Fix Select dropdown z-index */
+    [data-radix-popper-content-wrapper] {
+        z-index: 100 !important;
+    }
 }
 
 @layer components {
