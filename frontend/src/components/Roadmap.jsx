@@ -8,19 +8,29 @@ export const Roadmap = () => {
       'Definição do conceito',
       'Taxonomia de expressões',
       'Prototipação inicial',
+      'Simulador web interativo',
     ]},
     { phase: 'Em Desenvolvimento', status: 'progress', items: [
       'Firmware ESP32 MVP',
       'Diretrizes de design visual',
       'SDK Python',
-    ]},
-    { phase: 'Planejado', status: 'planned', items: [
       'SDK JavaScript',
-      'Simulador web interativo',
-      'Site de documentação',
+    ]},
+    { phase: 'Roadmap - Motor de IA', status: 'planned', items: [
+      'Integração Qwen 2.5 Coder 7B para processamento contextual',
+      'Modelo de visão para reconhecimento de expressões humanas',
+      'Sistema de aprendizado adaptativo baseado em interações',
+      'Motor de raciocínio explicável (XAI)',
+      'Fine-tuning com transfer learning',
+      'Inferência local otimizada (ONNX Runtime)',
+    ]},
+    { phase: 'Futuro', status: 'planned', items: [
+      'Site de documentação completo',
       'Biblioteca de expressões ampliada',
       'Suporte para mais displays',
-      'Integração ROS',
+      'Integração ROS 2',
+      'Comunidade de datasets de expressões',
+      'Marketplace de modelos treinados',
     ]},
   ];
 

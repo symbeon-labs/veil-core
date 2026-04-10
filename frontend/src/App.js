@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import ExpressionSimulator from './components/ExpressionSimulator';
 import Features from './components/Features';
 import ExpressionModel from './components/ExpressionModel';
+import AIEngine from './components/AIEngine';
 import HardwareSupport from './components/HardwareSupport';
 import CodeExamples from './components/CodeExamples';
 import UseCases from './components/UseCases';
@@ -22,6 +23,7 @@ function App() {
         <ExpressionSimulator />
         <Features />
         <ExpressionModel />
+        <AIEngine />
         <HardwareSupport />
         <CodeExamples />
         <UseCases />

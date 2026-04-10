@@ -91,21 +91,10 @@ export const Hero = () => {
                 <img
                   src="https://images.unsplash.com/photo-1750096319146-6310519b5af2"
                   alt="Robotic Eye Interface"
-                  className="w-full h-auto rounded-2xl"
+                  className="w-full h-auto rounded-2xl shadow-2xl"
                 />
                 {/* Glow Effect */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-secondary/20 rounded-2xl blur-2xl -z-10" />
-              </div>
-              
-              {/* Floating Cards */}
-              <div className="absolute -bottom-4 -left-4 bg-card border border-primary/20 rounded-lg p-4 shadow-lg glow-cyan hidden lg:block">
-                <div className="text-sm text-muted-foreground">Estado Atual</div>
-                <div className="text-lg font-bold text-primary">Processing...</div>
-              </div>
-              
-              <div className="absolute -top-4 -right-4 bg-card border border-secondary/20 rounded-lg p-4 shadow-lg hidden lg:block">
-                <div className="text-sm text-muted-foreground">Expressões</div>
-                <div className="text-lg font-bold text-secondary">50+</div>
               </div>
             </div>
           </div>

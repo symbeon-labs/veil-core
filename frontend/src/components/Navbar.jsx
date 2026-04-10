@@ -18,7 +18,7 @@ export const Navbar = () => {
     { label: 'Início', href: '#hero' },
     { label: 'Simulador', href: '#simulator' },
     { label: 'Recursos', href: '#features' },
-    { label: 'Documentação', href: '#docs' },
+    { label: 'IA Adaptativa', href: '#ai-engine' },
     { label: 'Hardware', href: '#hardware' },
     { label: 'Comunidade', href: '#community' },
   ];

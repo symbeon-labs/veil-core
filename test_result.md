@@ -375,15 +375,76 @@ frontend:
         agent: "testing"
         comment: "Smooth scrolling works correctly. All sections now have proper id attributes: simulator, usecases, roadmap, examples, docs, hardware, community. Navigation links successfully scroll to their target sections with smooth behavior. Tested navigation to UseCases, Roadmap, and Examples sections - all working perfectly."
 
+  - task: "Hero Section - Clean Image Display (No Floating Text Overlays)"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/Hero.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Hero section updated successfully. Hero image displays cleanly without floating text card overlays. Image loads correctly with clean presentation and glow effect. Verified no text overlays obscuring the robotic eye interface image. Desktop and mobile viewports tested - image displays properly on both."
+
+  - task: "AI Engine Section - Complete Implementation"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/AIEngine.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "AI Engine section (id='ai-engine') fully functional. Section header 'Motor de IA Adaptativa' displays correctly. All 3 capability cards present and working: 'Reconhecimento de Expressões Humanas', 'Aprendizado Contextual', 'Ponte Explicável'. 4-step workflow with numbered circles (1-4) displays correctly: Captura de Padrões, Processamento Contextual, Geração Adaptativa, Aprendizado Contínuo. Tech stack section with 2 columns renders properly, includes all required technologies: Qwen 2.5 Coder 7B, Modelos de Visão, ONNX Runtime, Edge Computing, Transfer Learning, Explainable AI. Example use case card displays with practical scenario. Section is fully responsive on mobile (390x844) with columns stacking vertically. Smooth scrolling to section works correctly."
+
+  - task: "Navigation - IA Adaptativa Link"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/Navbar.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "'IA Adaptativa' navigation link added to navbar and working correctly. Link points to #ai-engine and appears in both desktop and mobile navigation menus. Clicking the link smoothly scrolls to the AI Engine section. Link text displays as 'IA Adaptativa' in navigation bar. Mobile menu includes the link and is accessible via hamburger menu. Navigation tested on both desktop (1920x1080) and mobile (390x844) viewports."
+
+  - task: "Roadmap - Motor de IA Phase"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/Roadmap.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Roadmap updated with new 'Roadmap - Motor de IA' phase. Phase displays correctly in timeline with 'planned' status. All 6 AI-related items are listed: 'Integração Qwen 2.5 Coder 7B para processamento contextual', 'Modelo de visão para reconhecimento de expressões humanas', 'Sistema de aprendizado adaptativo baseado em interações', 'Motor de raciocínio explicável (XAI)', 'Fine-tuning com transfer learning', 'Inferência local otimizada (ONNX Runtime)'. Phase appears between 'Em Desenvolvimento' and 'Futuro' phases. Roadmap section accessible via #roadmap anchor. Mobile responsive layout verified."
+
+  - task: "Overall User Journey - Hero to AI Engine to Hardware"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "Complete user journey tested successfully. Flow: Hero → Simulator → AI Engine → Hardware all sections load without errors. AIEngine component properly integrated in App.js between ExpressionModel and HardwareSupport. All sections accessible via navigation links and smooth scrolling. No console errors or network failures during navigation. Page loads correctly on initial visit. All sections render properly in sequence. Tested on both desktop and mobile viewports - complete flow works on both."
+
 metadata:
   created_by: "testing_agent"
-  version: "1.0"
-  test_sequence: 2
+  version: "1.1"
+  test_sequence: 3
   run_ui: true
   last_updated: "2026-04-10"
 
 test_plan:
   current_focus:
+    - "New AI Engine section and related features tested and working"
     - "All priority features tested and working"
   stuck_tasks: []
   test_all: false
@@ -394,4 +455,6 @@ agent_communication:
     message: "Completed comprehensive testing of VEIL framework landing page. CRITICAL ISSUE FOUND: The color dropdown in the Expression Simulator has a pointer-events interception problem. The shadcn/ui Select component's dropdown wrapper is blocking clicks on the SelectItem options. This prevents users from selecting colors, which is a core feature of the simulator. The dropdown opens correctly and displays all options, but clicking them fails with 'subtree intercepts pointer events' error. This needs immediate attention as it blocks the main interactive feature of the application. All other sections (Navigation, Hero, Features, Hardware, Code Examples, Community, Footer) are working correctly."
   - agent: "testing"
     message: "RE-TEST COMPLETE - ALL ISSUES FIXED! Comprehensive re-testing of all priority features shows complete success. PRIORITY 1 (Previously Failing): ✓ Color dropdown now works perfectly (Magenta selection tested), ✓ Effect dropdown now works perfectly (Pulsar selection tested), ✓ All 6 preset buttons functional and apply correct values. PRIORITY 2 (Navigation): ✓ UseCases section navigation works (id='usecases' added), ✓ Roadmap section navigation works (id='roadmap' added), ✓ Examples section navigation works (id='examples' added). PRIORITY 3 (Full Simulator Flow): ✓ Complete flow tested - shape, color, intensity, effect changes all work, ✓ Play/Pause controls functional, ✓ Eye visualization updates correctly, ✓ Alerta preset applies perfectly, ✓ Copy code button works (clipboard API blocked in test env only - not app issue), ✓ Reset button restores defaults correctly. PRIORITY 4 (Mobile): ✓ Mobile menu toggle works, ✓ Simulator fully functional on mobile viewport (390x844). The main agent successfully fixed the critical pointer-events issue in the dropdowns and added all required section IDs. The VEIL framework landing page is now fully functional across all tested features and viewports."
+  - agent: "testing"
+    message: "NEW FEATURES TESTING COMPLETE - ALL WORKING! Tested updated VEIL framework landing page with new AI Engine section and related changes. RESULTS: ✓ Hero Section: Floating text cards removed, image displays cleanly without overlays, verified on desktop and mobile. ✓ AI Engine Section: Complete implementation working - section loads at #ai-engine, all 3 capability cards display correctly (Reconhecimento de Expressões Humanas, Aprendizado Contextual, Ponte Explicável), 4-step workflow displays with numbered circles (1-4), tech stack section with 2 columns includes all required items (Qwen 2.5 Coder 7B, Vision models, ONNX Runtime, Edge Computing, Transfer Learning, Explainable AI), example use case card displays with practical scenario. ✓ Navigation: 'IA Adaptativa' link added to navbar, smooth scroll to AI Engine section works on desktop and mobile. ✓ Roadmap: New 'Roadmap - Motor de IA' phase added with all 6 AI-related items listed (Qwen 2.5, vision models, adaptive learning, XAI, transfer learning, ONNX Runtime). ✓ Overall Flow: Complete user journey Hero → Simulator → AI Engine → Hardware tested successfully, all sections load without errors. ✓ Mobile Responsiveness: All new features fully responsive on mobile viewport (390x844), columns stack vertically, navigation link accessible in mobile menu. NO ISSUES FOUND. All requested features implemented and working correctly."
 
