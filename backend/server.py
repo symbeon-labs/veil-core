@@ -5,10 +5,13 @@ from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field, ConfigDict
-from typing import List
+from pydantic import BaseModel, ConfigDict, Field
+from typing import List, Dict, Any
 import uuid
 from datetime import datetime, timezone
+
+# VEIL Core Integration
+from veil_core.orchestrator import VeilOrchestrator
 
 
 ROOT_DIR = Path(__file__).parent
@@ -20,10 +23,18 @@ client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
 # Create the main app without a prefix
-app = FastAPI()
+app = FastAPI(title="VEIL Core API - Sovereign Nervous System")
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
+veil_router = APIRouter(prefix="/api/veil", tags=["VEIL Core"])
+
+# Initialize Global Sovereign Orchestrator
+try:
+    orchestrator = VeilOrchestrator()
+except Exception as e:
+    logging.error(f"Failed to bootstrap VEIL Orchestrator: {e}")
+    orchestrator = None
 
 
 # Define Models
@@ -66,8 +77,29 @@ async def get_status_checks():
     
     return status_checks
 
+# VEIL Endpoints
+class StimulusInput(BaseModel):
+    sensor_id: str
+    payload_size: int
+    data: str = "mock_bytes" # Em um cenario real, isso seria multipart form com binarios LiDAR/RGB
+
+@veil_router.post("/process", response_model=Dict[str, Any])
+async def process_veil_stimulus(input_data: StimulusInput):
+    if not orchestrator:
+        return {"error": "VEIL Orchestrator is disconnected."}
+        
+    try:
+        # Pass the mock bytes up to the Sovereign VEIL engine
+        # In a real environment, this receives the LiDAR dense point cloud or RGB normalized frame
+        raw_bytes = input_data.data.encode('utf-8')
+        result = await orchestrator.process_stimulus(raw_bytes)
+        return {"status": "success", "agent_id": input_data.sensor_id, "data": result}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
 # Include the router in the main app
 app.include_router(api_router)
+app.include_router(veil_router)
 
 app.add_middleware(
     CORSMiddleware,

@@ -10,8 +10,12 @@ VEIL_CONFIG = {
     # 'vision_model': 'yolo_v8',      # GPU Server deploy
     'vision_model': 'vision_mock',    # Rápida prototipagem
     
-    # 'context_analyzer': 'qwen_1.5b',# Edge LLM deploy
-    'context_analyzer': 'rule_based', # Fallback determinístico
+    # --- Context/LLM Processor Adapters ---
+    # The framework is completely agnostic. Any LLM API or Local model can be plugged in:
+    # 'context_analyzer': 'qwen_2.5_coder_1.5b',         # Original Edge
+    # 'context_analyzer': 'gemma_4_2b_it',               # JSON-optimized Edge
+    # 'context_analyzer': 'openai_gpt4o_adapter',        # Cloud API
+    'context_analyzer': 'rule_based',                    # Fallback determinístico sem IA
     
     'expression_generator': 'veil_standard_generator',
     

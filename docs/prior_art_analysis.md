@@ -204,6 +204,7 @@
 | **Aprendizado de Padrões Humanos** | Reconhecimento existe, mas não aprendizado de mapeamento | ✅ Sim - Visão + LLM |
 | **Hardware-Agnóstico** | Patentes focam em hardware específico | ✅ Sim - Framework modular |
 | **Open-Source + Patente** | Modelo híbrido raro | ✅ Sim - Patente defensiva |
+| **Privacidade Biométrica Extrema** | Uso compulsório de câmeras RGB expõe rosto | ✅ Sim - Sensoriamento LiDAR |
 
 ### 5.2 Elementos Patenteáveis
 
@@ -237,6 +238,17 @@
 
 **Reivindicação Sugerida**:  
 *"Sistema de raciocínio explicável para expressões emocionais em robótica caracterizado por: (a) módulo de análise contextual que identifica estado emocional desejado; (b) banco de dados de mapeamentos estado-expressão; (c) gerador de justificativas textuais que explica por que uma expressão específica foi escolhida; (d) interface de auditoria para humanos revisarem decisões do sistema."*
+
+---
+
+#### **Elemento 4: Arquitetura Visão-Agnóstica e Privacidade Dimensional (LiDAR)**
+**Novidade**: Substituição ou abstração completa do clássico reconhecimento RGB facial por reconhecimento de malha 3D e tensão topológia muscular usando sensores Time-of-Flight / LiDAR. Isso viabiliza a implementação de IA emocional em ambientes privados (hospitais, carros, quartos).
+
+**Prior Art mais Próximo**: EP3512680B1 (Toyota) (uso de sensores gerais)
+**Diferencial**: O VEIL processa a emoção diretamente da tensão profunda e topográfica descartando cor, pele e identidade visual (Zero-Trust Privacy Protocol).
+
+**Reivindicação Sugerida**:
+*"Sistema hardware e modelo agnóstico... caracterizado por um módulo de visão baseado em abstração em camadas (Adapters), configurado para recepcionar receptores infravermelhos / matrizes LiDAR, traduzindo topologia de malha em construtos emocionais tridimensionais sem requerer processamento RGB."*
 
 ---
 

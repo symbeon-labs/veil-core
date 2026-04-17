@@ -14,7 +14,8 @@ export const ExpressionSimulator = () => {
   const [intensity, setIntensity] = useState(50);
   const [effect, setEffect] = useState('static');
   const [isPlaying, setIsPlaying] = useState(false);
-
+  const [xaiJustification, setXaiJustification] = useState("O sistema iniciou em modo manual. Acione o motor VEIL para raciocínio autônomo.");
+  const [isProcessing, setIsProcessing] = useState(false);
   const shapes = [
     { value: 'circle', label: 'Círculo', path: 'M 50 50 m -40 0 a 40 40 0 1 0 80 0 a 40 40 0 1 0 -80 0' },
     { value: 'oval', label: 'Oval', path: 'M 50 35 a 35 15 0 1 0 0 30 a 35 15 0 1 0 0 -30' },
@@ -132,6 +133,46 @@ controller.setExpression(expression);`;
     setEffect(preset.effect);
     setIsPlaying(true);
     toast.success(`Preset "${preset.name}" aplicado!`);
+  };
+
+  const inferEmotionFromBackend = async () => {
+    setIsProcessing(true);
+    setXaiJustification("Analisando estímulo (Aguardando XAI Adapter)...");
+    
+    try {
+      const response = await fetch("http://localhost:8000/api/veil/process", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sensor_id: "web_simulator_01",
+          payload_size: 1024,
+          data: "mock_bytes_from_browser_lidar"
+        })
+      });
+
+      const result = await response.json();
+      if (result.status === "success") {
+        const expressionOutput = result.data.expression_output.components;
+        // The generator currently sends: shape, color, effect.
+        if (expressionOutput) {
+          setShape(expressionOutput.shape || "circle");
+          setColor(expressionOutput.color || "cyan");
+          setEffect(expressionOutput.effect || "static");
+          setIntensity(85); // Auto-intensity based on emotion
+          setIsPlaying(true);
+        }
+        setXaiJustification(result.data.xai_justification || "Expressão gerada com sucesso pela regra determinística.");
+        toast.success("Cognição emocional completa via API Local.");
+      } else {
+        toast.error("Erro no motor VEIL: " + result.message);
+        setXaiJustification("Falha na conexão com o orquestrador.");
+      }
+    } catch (error) {
+      toast.error("Servidor VEIL offline. Execute: uvicorn backend.server:app");
+      setXaiJustification("Servidor Offline. Rode o uvicorn para habilitar o Edge Pipeline.");
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -255,8 +296,36 @@ controller.setExpression(expression);`;
             </Card>
           </div>
 
-          {/* Right Side - Controls & Code */}
+          {/* Right Side - Controls & Code & XAI */}
           <div className="space-y-6">
+            
+            {/* VEIL XAI Engine Box */}
+            <Card className="bg-primary/5 backdrop-blur border-primary shadow-lg overflow-hidden relative">
+              <div className="absolute top-0 right-0 p-4 opacity-10">
+                <RefreshCw className="w-24 h-24" />
+              </div>
+              <CardHeader>
+                <CardTitle className="text-primary flex items-center gap-2">
+                  <Play className="w-5 h-5" /> Motor VEIL Core
+                </CardTitle>
+                <CardDescription>Inferência Dinâmica (API Python Local)</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Button 
+                  onClick={inferEmotionFromBackend} 
+                  disabled={isProcessing}
+                  className="w-full bg-gradient-to-r from-primary to-cyan-500 hover:from-primary/80 hover:to-cyan-500/80"
+                >
+                  {isProcessing ? <RefreshCw className="mr-2 h-4 w-4 animate-spin" /> : null}
+                  Ativar Percepção Neural (Lidar Mock)
+                </Button>
+                <div className="bg-background/80 p-4 rounded-lg font-mono text-sm border border-border">
+                  <span className="text-muted-foreground block mb-2">// Auditoria Explicável (XAI Log)</span>
+                  <p className="text-foreground leading-relaxed">{xaiJustification}</p>
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Controls */}
             <Card className="bg-card/50 backdrop-blur border-border">
               <CardHeader>

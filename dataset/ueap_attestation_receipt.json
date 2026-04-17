@@ -1,0 +1,18 @@
+{
+  "event": {
+    "id": "evt_8a274d4a19c5d5c5",
+    "actor": "VEIL-Aegis-Harvester",
+    "action": "Model.Dataset.Genesis",
+    "object": "veil_finetuning_substrate_500",
+    "location": "Edge-Local",
+    "evidence": "Dataset contendo 500 interações topológicas ZK-Private. Hash: 0x35d16ee8a2c56274f60b3502df183fbf7e9a0aeafd540fbcd951c5ce4f5ad893. Todos os frames RGB originais foram destruídos em conformidade LGPD/GDPR.",
+    "timestamp": "2026-04-17T16:23:12.787Z"
+  },
+  "attestation": {
+    "attestation_id": "att_0912f9af109776a7",
+    "event_id": "evt_8a274d4a19c5d5c5",
+    "issuer": "Symbeon-Cortex-V1",
+    "zk_proof_signature": "0x7089f8acbc70f5ac521615ffac27d3337a17d33ac9ba513dd3b8053e0dfbc012",
+    "status": "VERIFIED"
+  }
+}

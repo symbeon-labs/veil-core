@@ -142,13 +142,15 @@ E = (Shape, Color, Intensity, Effect)
 
 **Architecture**:
 ```python
-class VisionModule:
-    model: MobileNetV3_FaceExpression  # Quantized INT8
-    input: 96x96 grayscale image
-    output: Emotion(valence, arousal, dominance)
+class IVisionModel(ABC):
+    @abstractmethod
+    async def process_frame(self, frame_data: bytes) -> Dict[str, Any]:
+        pass
 ```
 
-**Implementation**: We use MobileNetV3 [19] fine-tuned on FER-2013 [27] + AffectNet [28] datasets, compressed to 4.2MB via quantization. Inference time: 187ms on ESP32-S3 @ 240MHz.
+**Implementation Options (Adapters)**:
+1. **RGB Adapter (MobileNetV3)**: Fine-tuned on FER-2013 [27] + AffectNet [28], compressed to 4.2MB via quantization. Inference time: 187ms on ESP32-S3 @ 240MHz.
+2. **LiDAR / Time-of-Flight Adapter**: Replaces RGB frames with infrared point clouds, computing muscular tension directly from 3D topology. This eliminates lighting issues and ensures absolute *Blind Privacy* by discarding color/texture data (rendering traditional surveillance impossible).
 
 **Output**: Three-dimensional emotion vector (valence, arousal, dominance) [29], capturing nuanced emotional states beyond discrete categories.
 
@@ -492,45 +494,58 @@ Workload Score (0-100, lower is better):
 
 ### 7.1 Use Cases
 
-#### **7.1.1 Healthcare**
+#### **7.1.1 Healthcare and Autism Therapy**
 
-**Scenario**: Assistive robot for elderly care.
+**Scenario**: Assistive robot for elderly care and children on the Autism Spectrum.
 
-**Challenge**: Detecting and responding to patient distress.
+**Challenge**: Detecting and responding to distress or needing high emotional predictability, while demanding absolute privacy in bedrooms.
 
 **VEIL Solution**: 
-- Vision module detects facial pain expressions.
-- LLM reasons: "User in discomfort, robot should convey empathy + call for help."
-- Displays: Oval Blue Pulse (empathetic), triggers alert.
-- XAI: "I see you might be in pain. I'm calling for assistance."
+- *LiDAR Adapter* measures emotional topography in total darkness without compromising facial identity.
+- LLM reasons: "User in discomfort, robot should convey empathy."
+- Displays: Oval Blue Pulse (empathetic).
+- XAI: Explains the exact logic to the medical auditor, satisfying FDA/ANVISA transparency requirements.
 
-**Impact**: 93% of elderly participants (N=30, pilot study) found expressions comforting vs 67% for generic icons (p=0.002).
+#### **7.1.2 In-Cabin Automotive AI**
 
-#### **7.1.2 Education**
+**Scenario**: A "Digital Pet" or driver-assistant on the car dashboard (similar to NIO's NOMI).
 
-**Scenario**: Tutoring robot for children.
-
-**Challenge**: Maintaining engagement, adapting to frustration.
+**Challenge**: Adapting to driver fatigue or road rage in real-time.
 
 **VEIL Solution**:
-- Detects child's frustration (frown, low valence).
-- Adapts to encouraging expression (Wide Green Blink).
-- XAI: "I see this is hard. Let's try together!"
+- Fuses ambient light from the car with driver expression. Maps stress into calming geometrical parameters (smooth colors, slow animations).
+- Becomes an alert system (Magenta, sharp angles) if the driver shows drowsiness.
 
-**Impact**: 27% increase in session duration (p=0.011, N=45 children, ages 7-12).
+#### **7.1.3 Desktop and Productivity Assistant**
 
-#### **7.1.3 Industrial**
+**Scenario**: A non-physical robotic agent existing merely as a Desktop Widget.
 
-**Scenario**: Collaborative robot (cobot) in manufacturing.
-
-**Challenge**: Communicating operational status, errors.
+**Challenge**: Minimizing cognitive overload during intense programming or writing sessions.
 
 **VEIL Solution**:
-- Clear color coding: Cyan (normal), Yellow (warning), Red (error).
-- Scan effect during processing → workers know robot is active.
-- XAI via display: "Detecting part orientation..."
+- Analyzes webcam visual data locally (Edge). If frustration surfaces after 30 minutes of unchanged screen state, the UI eyes narrow in empathy (`curious_concerned` state) and subtly suggest a break.
 
-**Impact**: 41% reduction in operator inquiry time (p < 0.001, N=18 factory workers, 2-week deployment).
+#### **7.1.4 Smart Retail Kiosks**
+
+**Scenario**: Fast-food ordering kiosks or ATM machines.
+
+**Challenge**: Mitigating user anger against confusing UI layouts.
+
+**VEIL Solution**:
+- Identifies facial tension and impatience.
+- The UI header adopts a helpful, apologetic geometric state, immediately triggering a silent alert to the human manager.
+
+#### **7.1.5 Governança Autônoma Global e Transações Críticas (A Fusão Symbeon)**
+Um escopo emergente para robótica afetiva é atestar a estabilidade orgânica de um usuário humano antes de ceder acesso a agentes que executem operações de alto risco (Ex: Ativação de contingência física, autorização de Swarms robóticos, interações médicas críticas). Ao incorporar o VEIL ao Universal Event Attestation Protocol (UEAP) dentro da arquitetura HAAS de Enxames de IA, o robô opera como uma interface oracular de Soberania Humana: se o LiDAR afere que o humano está sob extrema tensão emocional/coerção ('arousal' esmagador sob valência ultra-negativa), o robô XAI denega o pulso ético (O Nó GP-Ethical reprova o Trinity Consensus), abortando a assinatura transacional descentralizada por quebra de segurança psíquica, servindo como uma vacina anti-coerção neurométrica inquebrável.
+
+#### **7.1.6 Open-Source Educational Toys**
+
+**Scenario**: Hackable STEM robots (like Raspberry Pi / Mindstorms).
+
+**Challenge**: Giving kids a robust "Emotional Operating System" for their robot builds.
+
+**VEIL Solution**:
+- VEIL acts as the modular OS. Students can swap a WebCam for an IR Sensor, and the emotional core continues to output standard VEIL expressions.
 
 ### 7.2 Limitations
 
