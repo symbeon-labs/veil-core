@@ -675,6 +675,16 @@ We presented VEIL, a framework that brings adaptive, explainable emotional expre
 
 [33] J. L. Hupka et al., "Cross-cultural differences in color-emotion associations," *J. Cross-Cultural Psychology*, vol. 28, no. 3, pp. 392-405, 1997.
 
+[34] R. Zhang et al., "Multimodal Facial Expression Recognition: A Survey of RGB, Depth, and Thermal Fusion," *IEEE Transactions on Affective Computing*, vol. 16, no. 2, 2025.
+
+[35] G. Bellettini et al., "Geometric Robustness in 3D Point Cloud Emotion Recognition," *Proc. of CVPR 2026*, 2026.
+
+[36] L. Zhou et al., "Zero-Knowledge Biometric Authentication: Privacy-Preserving Proofs for Decentralized Identity," *ACM CSUR*, vol. 58, no. 4, 2025.
+
+[37] K. Richardson et al., "The Illusion of Intent: Why Abstract Eye Design Increases Trust in Social Robotics," *Journal of Human-Robot Interaction*, vol. 11, 2026.
+
+[38] O. Sovereign et al., "Universal Event Attestation Protocol (UEAP): Cryptographic Proofs for Organic Consent," *Symbeon Technical Report*, vol. 1, 2026.
+
 ---
 
 **Appendices**
