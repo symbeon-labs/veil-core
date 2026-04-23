@@ -12,15 +12,16 @@ from datetime import datetime, timezone
 
 # VEIL Core Integration
 from veil_core.orchestrator import VeilOrchestrator
+from routes.telemetry import router as telemetry_router
 
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
-mongo_url = os.environ['MONGO_URL']
+mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
 client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+db = client[os.environ.get('DB_NAME', 'veil_db')]
 
 # Create the main app without a prefix
 app = FastAPI(title="VEIL Core API - Sovereign Nervous System")
@@ -100,6 +101,7 @@ async def process_veil_stimulus(input_data: StimulusInput):
 # Include the router in the main app
 app.include_router(api_router)
 app.include_router(veil_router)
+app.include_router(telemetry_router)
 
 app.add_middleware(
     CORSMiddleware,

@@ -11,6 +11,7 @@ import CodeExamples from './components/CodeExamples';
 import UseCases from './components/UseCases';
 import Roadmap from './components/Roadmap';
 import Community from './components/Community';
+import Dashboard from './components/Dashboard';
 import Footer from './components/Footer';
 import './App.css';
 
@@ -29,6 +30,7 @@ function App() {
         <UseCases />
         <Roadmap />
         <Community />
+        <Dashboard />
       </main>
       <Footer />
       <Toaster />

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
@@ -16,6 +17,7 @@ export const ExpressionSimulator = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [xaiJustification, setXaiJustification] = useState("O sistema iniciou em modo manual. Acione o motor VEIL para raciocínio autônomo.");
   const [isProcessing, setIsProcessing] = useState(false);
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8000';
   const shapes = [
     { value: 'circle', label: 'Círculo', path: 'M 50 50 m -40 0 a 40 40 0 1 0 80 0 a 40 40 0 1 0 -80 0' },
     { value: 'oval', label: 'Oval', path: 'M 50 35 a 35 15 0 1 0 0 30 a 35 15 0 1 0 0 -30' },
@@ -162,6 +164,22 @@ controller.setExpression(expression);`;
           setIsPlaying(true);
         }
         setXaiJustification(result.data.xai_justification || "Expressão gerada com sucesso pela regra determinística.");
+        
+        // --- NOVO: Enviar para o Telemetry Analytics ---
+        try {
+          await axios.post(`${BACKEND_URL}/api/telemetry`, {
+            device_id: "web_simulator_01",
+            expression: expressionOutput?.shape || "custom",
+            confidence: 0.95,
+            valence: 0.5,
+            arousal: 0.5,
+            explanation: result.data.xai_justification || "Simulação Web",
+            timestamp: Date.now()
+          });
+        } catch (telemetryErr) {
+          console.error("Falha ao registrar telemetria:", telemetryErr);
+        }
+        
         toast.success("Cognição emocional completa via API Local.");
       } else {
         toast.error("Erro no motor VEIL: " + result.message);
