@@ -3,7 +3,7 @@
 
 # VEIL Core: Visual Emotional Interface Language
 
-**Sovereign Edge Framework para Inteligência Emocional Agnóstica & Robótica Segura.**
+**Experimental research framework for multimodal perception, privacy-aware sensing and robotic interfaces.**
 
 [![License](https://img.shields.io/badge/License-MIT-white?style=for-the-badge)](LICENSE)
 [![Zero-Trust](https://img.shields.io/badge/Privacy-Zero--Trust_LiDAR-00FF88?style=for-the-badge)](docs/strategy_and_lidar_research.md)
@@ -15,7 +15,7 @@
 
 ## 🌌 Visão Geral
 
-O **VEIL** não é apenas um projeto de robótica mecânica; é um **framework hiper-maturo, soberano e agnóstico de hardware/modelo** que traduz nuances topográficas do mundo real em expressões robóticas justificáveis (XAI - *Explainable AI*).
+O **VEIL** é uma linha experimental de pesquisa que explora como sinais espaciais e multimodais podem ser transformed into interpretable representations for robotic interfaces. Claims about emotional-state inference, privacy and safety depend on the dataset, sensing hardware, model and deployment context.
 
 Diferente de sistemas preexistentes (como drivers que leem imagens RGB ou atuam sob nuvens centralizadas), o VEIL foi fundado no **Protocolo de Privacidade Dimensional**: nós descartamos fotografias. O VEIL compreende apenas pontuações no espaço tridimensional (pontos biométricos de tensão capturados via LiDAR/Time-of-Flight) e infere estados psicológicos complexos utilizando IAs locais em hardware restrito (Edge Computing).
 
@@ -84,4 +84,6 @@ npm start
 ---
 
 ## 📜 Propriedade Intelectual & P&D
+
+This repository is a research artifact. Any patent, licensing or proprietary-status claims should be verified against the current legal and ownership records before being treated as established facts.
 A fundação operacional completa, as especificações acadêmicas detalhadas do framework LiDAR e as minutas das reivindicações mecânicas da arquitetura agnóstica podem ser auditadas dentro do diretório de patentes: `/docs/`
